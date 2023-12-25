@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
+
+
 module.exports = {
   prefix: 'gn-',
   purge: [],
@@ -10,5 +13,9 @@ module.exports = {
    variants: {
      extend: {},
    },
-   plugins: [],
+   plugins: [
+    plugin(function({ addVariant }) {
+      addVariant('gn-range-slider-thumb', ['&::-webkit-slider-thumb', '&::slider-thumb'])
+    })
+  ],
  }

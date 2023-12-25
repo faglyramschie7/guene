@@ -2,6 +2,7 @@
 import { computed } from "vue"
 import { cva } from "class-variance-authority"
 import { cn } from "../lib/utils"
+import {useSlots} from "vue"
 const props = defineProps({
     leftIcon: Object,
     rightIcon: Object,
@@ -22,16 +23,31 @@ const props = defineProps({
         type: String,
         validator: val => ["default", "flat", "border", "text"].includes(val),
         default: "default"
+    },
+    block: {
+        type: Boolean,
+        default: false
     }
 
 });
+const slots = useSlots();
+
+const returnButtonBlockClass = computed(() => {
+  if(props.block) {
+    return 'block'
+  } else {
+    return 'non_block'
+  }
+})
 
 
 const buttonClass = computed(() => {
     return cva("gn-inline-flex gn-items-center gn-justify-center  gn-text-sm gn-rounded-xl gn-min-h-[32px] gn-px-3 gn-py-0.5 gn-transition gn-transform gn-ease-in-out gn-duration-300   ", {
         variants: {
-            intent: {
-            },
+            blocker: {
+              block: 'gn-w-full',
+              non_block: 'gn-w-32'
+            }
         },
         compoundVariants: [
             // primary
@@ -102,30 +118,30 @@ const buttonClass = computed(() => {
             {
                 intent: "dark",
                 type: 'default',
-                class: 'gn-bg-slate-950 gn-text-slate-400 hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(2,_6,_23,_0.6)_0px_17px_12px_-11px]'
+                class: 'gn-bg-slate-950 gn-text-white hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(2,_6,_23,_0.6)_0px_17px_12px_-11px]'
             },
             {
                 intent: 'dark',
                 type: 'flat',
-                class: 'gn-text-slate-400 gn-bg-slate-950 gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
+                class: 'gn-text-white gn-bg-slate-950 gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
             },
             {
                 intent: "dark",
                 type: 'border',
-                class: 'gn-bg-none gn-text-slate-400 gn-border gn-border-slate-950 hover:gn-bg-slate-950 hover:gn-bg-opacity-40'
+                class: 'gn-bg-none gn-text-white gn-border gn-border-slate-950 hover:gn-bg-slate-950 hover:gn-bg-opacity-40'
             },
         ]
     })({
         intent: props.intent,
-        type: props.type
+        type: props.type,
+        blocker: returnButtonBlockClass
     })
 })
 </script>
 
 <template>
-    <component :is="props.as" :class="cn(buttonClass)" class="gn-w-32">
-
-
+    <component :is="props.as" :class="cn(buttonClass)">
+    <!-- {{returnButtonBlockClass}} -->
         <!-- loaders -->
         <svg v-if="props.loading" class="gn-animate-spin gn-h-5 gn-w-5 gn-absolute" xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24">
@@ -136,7 +152,7 @@ const buttonClass = computed(() => {
         </svg>
 
         <!-- left component -->
-        <component :is="props.leftIcon" :class="['gn-w-5 gn-w-5 gn-mr-2', props.loading && 'gn-invisible']"
+        <component :is="props.leftIcon" :class="['gn-w-5 gn-mr-2', props.loading && 'gn-invisible']"
             v-if="!props.loading" />
 
         <!-- {{ $myPlugin.message }} -->
@@ -146,7 +162,7 @@ const buttonClass = computed(() => {
         </span>
         <!-- right component -->
 
-        <component :is="props.rightIcon" :class="['gn-w-5 gn-w-5 gn-ml-2', props.loading && 'gn-invisible']"
+        <component :is="props.rightIcon" :class="['gn-w-5 gn-ml-2', props.loading && 'gn-invisible']"
             v-if="!props.loading" />
 
     </component>

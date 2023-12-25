@@ -16,12 +16,16 @@
       </span>
     </span>
     <div class="gn-relative gn-h-[40px]">
-      <input class="gn-peer" :class="cn(inputClass)" />
+      <input class="gn-peer" :class="cn(inputClass, roundClass)" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''" />
 
-      <div :class="cn(iconClass)" v-if="$slots['icon']">
-        <slot name="icon"></slot>
+      <div :class="cn(iconClass, roundClass)" v-if="$slots['icon']" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''"  class="[&>span]:gn-w-5 [&>span]:gn-h-5" >
+        <span>
+          <slot name="icon"></slot>
+        </span>
       </div>
     </div>
+
+    {{roundedSizeChecker()}} {{cn(roundClass)}}
   </div>
 </template>
 
@@ -29,7 +33,10 @@
 import { computed } from "vue";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/utils";
-import { useSlots } from "vue";
+import { useSlots } from "vue"
+
+const available_sizes = ["xs", "sm", "md", "lg", "xs"]
+
 const props = defineProps({
   as: {
     type: [String, Object],
@@ -51,9 +58,14 @@ const props = defineProps({
     validator: (val) => ["left", "right"].includes(val),
     default: "left",
   },
+  roundSize: {
+    type: String,
+    validator: (val) => ["xs", "sm", "md", "lg", "xs"].includes(val),
+    default: "xl"
+  },
   size: {
     type: String,
-    validator: (val) => ["xs", "sm", "md", "lg", "xl"].includes(val),
+    validator: (val) => ["xs", "sm", "md", "lg", "xs"].includes(val),
     default: "md",
   },
 
@@ -61,7 +73,7 @@ const props = defineProps({
 
 const slots = useSlots();
 
-const returnPadding = () => {
+const returnIconPosition = () => {
   if (slots.icon) {
 
     return ["left", "right"].includes(props.iconPosition) ? props.iconPosition : "left";
@@ -70,19 +82,49 @@ const returnPadding = () => {
   }
 }
 
+
+const roundedSizeChecker = () => {
+  if(available_sizes.includes(props.roundSize)){
+    return props.roundSize
+  } else {
+    if(props.roundSize && props.roundSize.length > 0) {
+      return 'arb'
+    } else {
+      return 'xl'
+    }
+  }
+}
+
 // TODO EXPORT THIS TO A JS OR TS FILE. THIS MUST BE EXTERNAL
 
+const roundClass = computed(()=>{
+  return cva("", {
+    variants: {
+      roundSize: {
+        xs: 'gn-rounded xs',
+        sm: 'gn-rounded-sm',
+        md: 'gn-rounded-md',
+        lg: 'gn-rounded-lg',
+        xl: 'gn-rounded-xl',
+        //arb: `gn-rounded-[${props.roundSize}]`
+      }
+    }
+  })({
+      roundSize: roundedSizeChecker()
+    })
+})
+
 const inputClass = computed(() => {
-  return cva("gn-w-full gn-h-[100%] gn-bg-slate-700 gn-rounded-xl focus:gn-none gn-outline-none gn-border-none ", {
+  return cva("gn-w-full gn-h-[100%] gn-bg-slate-700 focus:gn-none gn-outline-none gn-border-none ", {
     variants: {
       padding: {
         default: 'gn-px-2',
         left: 'gn-pl-[50px] gn-pr-2',
         right: 'gn-pr-[50px] gn-pl-2'
-      }
+      },
     }
   })({
-    padding: returnPadding()
+    padding: returnIconPosition()
   })
 })
 
@@ -116,7 +158,7 @@ const iconClass = computed(() => {
         size: {
           xs: "",
           sm: "",
-          md: "gn-w-10 gn-h-full gn-rounded-xl",
+          md: "gn-w-10 gn-h-full",
           lg: "",
           xl: "",
         },
@@ -129,7 +171,7 @@ const iconClass = computed(() => {
     }
   )({
     size: props.size,
-    position: props.iconPosition,
+    position: returnIconPosition(),
   });
 });
 

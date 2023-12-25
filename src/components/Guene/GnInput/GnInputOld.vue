@@ -1,44 +1,179 @@
 <template>
-    <div class="gn-w-full gn-py-5">
-        <div class="gn-relative">
-            <input type="text" v-model="input_value"
-                :class="`gn-text-white gn-bg-slate-700 gn-rounded-xl gn-p-2 focus:gn-none gn-w-full focus:gn-scale-[${scale_length}] ${padding_left} gn-transition-all gn-duration-300 gn-outline-none gn-border-none`"
-                @focus="is_Focused = true" @blur="is_Focused = false">
-            <div
-                :class="`gn-absolute gn-top-[50%] gn-left-[20px] gn-transform gn--translate-x-1/2 gn--translate-y-1/2 gn-w-[28px] gn-h-[28px] gn-rounded-md gn-flex gn-items-center gn-justify-center gn-text-white  gn-transition-all gn-duration-300 gn-p-2 gn-bg-slate-800/20 ${button_translate}`">
-                <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42">
-                    </path>
-                </svg>
-            </div>
-            <div
-                :class="`gn-absolute gn-top-[50%] gn-left-[80px] gn-transform gn--translate-x-1/2 gn--translate-y-1/2  gn-transition-all gn-duration-300 gn-p-2 ${placeholder_translate}`">
-                Label
-            </div>
-        </div>
+  <div class="gn-relative">
+    <slot></slot>
+    <span :class="cn(stateMsgClass)">
+      <span class="gn-text-red-700" v-if="$slots['state-msg-danger']">
+        <slot name="state-msg-danger" />
+      </span>
+      <span class="gn-text-amber-500" v-if="$slots['state-msg-warn']">
+        <slot name="state-msg-warn" />
+      </span>
+      <span class="gn-text-green-700" v-if="$slots['state-msg-success']">
+        <slot name="state-msg-success" />
+      </span>
+      <span class="gn-text-white" v-if="$slots['state-msg-primary']">
+        <slot name="state-msg-primary" />
+      </span>
+    </span>
+    <div class="gn-relative gn-h-[40px]">
+      <input class="gn-peer" :class="cn(inputClass, roundClass)" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''" />
 
-        <p class="gn-text-red-600 gn-pl-[2] gn-text-xs gn-mt-2 gn-pl-5">
-            State
-        </p>
+      <div :class="cn(iconClass, roundClass)" v-if="$slots['icon']" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''"  >
+        <span>
+          <slot name="icon"></slot>
+        </span>
+      </div>
     </div>
+
+    {{roundedSizeChecker()}} {{cn(roundClass)}}
+  </div>
 </template>
 
-<script setup lang="ts">
-import { ref, computed } from 'vue'
-let scale_length = 1.01
-let icons = ref(2)
-let padding_left = icons.value !== 0 ? `gn-pl-[${icons.value * 25}px]` : `gn-pl-10`
-let is_Focused = ref(false)
-let input_value = ref('')
-const button_translate = computed(() => {
-    return is_Focused.value ? 'gn-bg-gray-800/100 gn--translate-y-[18px] gn--translate-x-1/2 gn-left-[5px] gn-scale-[1.3] gn-text-white gn-drop-shadow-md ' : ''
+<script setup>
+import { computed } from "vue";
+import { cva } from "class-variance-authority";
+import { cn } from "../lib/utils";
+import { useSlots } from "vspan
+
+const available_sizes = ["xs", "sm", "md", "lg", "xs"]
+
+const props = defineProps({
+  as: {
+    type: [String, Object],
+    default: "input",
+  },
+  state: {
+    type: String,
+    validator: (val) =>
+      ["primary", "success", "danger", "warn", "dark"].includes(val),
+    default: "primary",
+  },
+  stateMsgPosition: {
+    type: String,
+    validator: (val) => ["topRight", "bottomRight", "bottomLeft"].includes(val),
+    default: "bottomLeft",
+  },
+  iconPosition: {
+    type: String,
+    validator: (val) => ["left", "right"].includes(val),
+    default: "left",
+  },
+  roundSize: {
+    type: String,
+    validator: (val) => ["xs", "sm", "md", "lg", "xs"].includes(val),
+    default: "xl"
+  },
+  size: {
+    type: String,
+    validator: (val) => ["xs", "sm", "md", "lg", "xs"].includes(val),
+    default: "md",
+  },
+
+});
+
+const slots = useSlots();
+
+const returnIconPosition = () => {
+  if (slots.icon) {
+
+    return ["left", "right"].includes(props.iconPosition) ? props.iconPosition : "left";
+  } else {
+    return 'default'
+  }
+}
+
+
+const roundedSizeChecker = () => {
+  if(available_sizes.includes(props.roundSize)){
+    return props.roundSize
+  } else {
+    if(props.roundSize && props.roundSize.length > 0) {
+      return 'arb'
+    } else {
+      return 'xl'
+    }
+  }
+}
+
+// TODO EXPORT THIS TO A JS OR TS FILE. THIS MUST BE EXTERNAL
+
+const roundClass = computed(()=>{
+  return cva("", {
+    variants: {
+      roundSize: {
+        xs: 'gn-rounded xs',
+        sm: 'gn-rounded-sm',
+        md: 'gn-rounded-md',
+        lg: 'gn-rounded-lg',
+        xl: 'gn-rounded-xl',
+        //arb: `gn-rounded-[${props.roundSize}]`
+      }
+    }
+  })({
+      roundSize: roundedSizeChecker()
+    })
 })
 
-const placeholder_translate = computed(() => {
-    return is_Focused.value ? 'gn-translate-y-[-55px]  gn-translate-x-[-85px] gn-text-white gn-drop-shadow-md gn-text-sm' : input_value.value.length > 0 ? 'gn-pl-5 gn-translate-y-[-55px]  gn-translate-x-[-85px] gn-text-white gn-drop-shadow-md gn-text-sm' : 'gn-text-gray-600'
+const inputClass = computed(() => {
+  return cva("gn-w-full gn-h-[100%] gn-bg-slate-700 focus:gn-none gn-outline-none gn-border-none ", {
+    variants: {
+      padding: {
+        default: 'gn-px-2',
+        left: 'gn-pl-[50px] gn-pr-2',
+        right: 'gn-pr-[50px] gn-pl-2'
+      },
+    }
+  })({
+    padding: returnIconPosition()
+  })
 })
+
+
+const stateMsgClass = computed(() => {
+  return cva("gn-px-5 gn-absolute gn-text-xs", {
+    variants: {
+      stateMsgPosition: {
+        topRight: "gn--top-1/2 gn-right-0",
+        bottomLeft: "gn--bottom-1/2 gn-left-0",
+        bottomRight: "gn--bottom-1/2 gn--right-1/2",
+      },
+      state: {
+        primary: "gn-text-white",
+        success: "gn-text-green-700",
+        danger: "gn-text-red-700",
+        warn: "gn-text-amber-500",
+      },
+    },
+  })({
+    stateMsgPosition: props.stateMsgPosition,
+    state: props.state,
+  });
+});
+
+const iconClass = computed(() => {
+  return cva(
+    "gn-bg-slate-700 gn-text-slate-400 gn-absolute gn-top-1/2 gn-transform gn--translate-y-1/2 gn-flex gn-items-center gn-justify-center gn-origin-0 gn-transition-all gn-duration-300 peer-focus:gn-bg-slate-600 peer-focus:gn-text-300",
+    {
+      variants: {
+        size: {
+          xs: "",
+          sm: "",
+          md: "gn-w-10 gn-h-full",
+          lg: "",
+          xl: "",
+        },
+        position: {
+          right:
+            "gn-right-0 peer-focus:-gn-translate-y-[70%] peer-focus:gn-translate-x-[20%]",
+          left: "gn-left-0 peer-focus:-gn-translate-y-[70%] peer-focus:-gn-translate-x-[20%]",
+        },
+      },
+    }
+  )({
+    size: props.size,
+    position: returnIconPosition(),
+  });
+});
 
 </script>
 
