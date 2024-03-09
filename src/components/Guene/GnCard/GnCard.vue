@@ -17,19 +17,19 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="gn-h-full">
+  <div class="h-full">
     <!-- type 1 -->
-    <div class="gn-relative gn-w-[250px]">
+    <div class="relative w-[250px]">
       <!-- image -->
-      <div class="gn-w-full gn-h-[250px] gn-overflow-hidden gn-z-10 gn-bg-black gn-rounded-xl gn-relative">
+      <div class="w-full h-[250px] overflow-hidden z-10 bg-black rounded-xl relative">
         <slot name="image" />
-        <div class="gn-absolute gn-px-1 gn-py-1 gn-top-0 gn-left-0 gn-z-1 gn-w-full">
+        <div class="absolute px-1 py-1 top-0 left-0 z-1 w-full">
           <slot name="callout-top-left"/>
         </div>
       </div>
       <!-- body -->
 
-      <div class="gn-w-full gn-relative gn-h-[150px] gn-bg-gray-950 gn-z-1 gn-mt-[-20px] gn-rounded-xl gn-text-white gn-pt-[25px] gn-px-2">
+      <div class="w-full relative h-[150px] bg-gray-950 z-1 mt-[-20px] rounded-xl text-white pt-[25px] px-2">
         <div>
           <slot name="title"/>
         </div>
@@ -39,7 +39,7 @@ const props = defineProps({
         <div>
           <slot name="description"/>
         </div>
-        <div class="gn-w-full">
+        <div class="w-full">
           <slot name="button" />
         </div>
       </div>

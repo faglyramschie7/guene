@@ -5,19 +5,19 @@ import GnButton from '../GnButton/GnButton.vue'
 
 
 <template>
-  <div class="gn-flex">
+  <div class="flex">
     <GnCard>
       <template #image>
        <img src="https://placehold.co/400" alt="">
       </template>
       <template #callout-top-left>
-        <div class="gn-px-2 gn-w-auto gn-bg-black gn-rounded-lg gn-text-white">
+        <div class="px-2 w-auto bg-black rounded-lg text-white">
           test
         </div>
       </template>
 
       <template #title>
-        <h1 class="gn-text-lg gn-font-bold">This is the titles</h1>
+        <h1 class="text-lg font-bold">This is the titles</h1>
       </template>
       <template #subtitle>
         i am the subtitle
@@ -26,7 +26,7 @@ import GnButton from '../GnButton/GnButton.vue'
         i am the description
       </template>
       <template #button>
-        <div class="gn-w-full">
+        <div class="w-full">
           <GnButton block>
            Hello World
           </GnButton>

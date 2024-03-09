@@ -1,22 +1,22 @@
 <template>
-  <div class="gn-relative">
+  <div class="relative">
     <slot></slot>
     <span :class="cn(stateMsgClass)">
-      <span class="gn-text-red-700" v-if="$slots['state-msg-danger']">
+      <span class="text-red-700" v-if="$slots['state-msg-danger']">
         <slot name="state-msg-danger" />
       </span>
-      <span class="gn-text-amber-500" v-if="$slots['state-msg-warn']">
+      <span class="text-amber-500" v-if="$slots['state-msg-warn']">
         <slot name="state-msg-warn" />
       </span>
-      <span class="gn-text-green-700" v-if="$slots['state-msg-success']">
+      <span class="text-green-700" v-if="$slots['state-msg-success']">
         <slot name="state-msg-success" />
       </span>
-      <span class="gn-text-white" v-if="$slots['state-msg-primary']">
+      <span class="text-white" v-if="$slots['state-msg-primary']">
         <slot name="state-msg-primary" />
       </span>
     </span>
-    <div class="gn-relative gn-h-[40px]">
-      <input class="gn-peer" :class="cn(inputClass, roundClass)" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''" />
+    <div class="relative h-[40px]">
+      <input class="peer" :class="cn(inputClass, roundClass)" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''" />
 
       <div :class="cn(iconClass, roundClass)" v-if="$slots['icon']" :style="roundedSizeChecker() == 'arb' ? `border-radius: ${props.roundSize}` : ''"  >
         <span>
@@ -101,12 +101,12 @@ const roundClass = computed(()=>{
   return cva("", {
     variants: {
       roundSize: {
-        xs: 'gn-rounded xs',
-        sm: 'gn-rounded-sm',
-        md: 'gn-rounded-md',
-        lg: 'gn-rounded-lg',
-        xl: 'gn-rounded-xl',
-        //arb: `gn-rounded-[${props.roundSize}]`
+        xs: 'rounded xs',
+        sm: 'rounded-sm',
+        md: 'rounded-md',
+        lg: 'rounded-lg',
+        xl: 'rounded-xl',
+        //arb: `rounded-[${props.roundSize}]`
       }
     }
   })({
@@ -115,12 +115,12 @@ const roundClass = computed(()=>{
 })
 
 const inputClass = computed(() => {
-  return cva("gn-w-full gn-h-[100%] gn-bg-slate-700 focus:gn-none gn-outline-none gn-border-none ", {
+  return cva("w-full h-[100%] bg-slate-700 focus:none outline-none border-none ", {
     variants: {
       padding: {
-        default: 'gn-px-2',
-        left: 'gn-pl-[50px] gn-pr-2',
-        right: 'gn-pr-[50px] gn-pl-2'
+        default: 'px-2',
+        left: 'pl-[50px] pr-2',
+        right: 'pr-[50px] pl-2'
       },
     }
   })({
@@ -130,18 +130,18 @@ const inputClass = computed(() => {
 
 
 const stateMsgClass = computed(() => {
-  return cva("gn-px-5 gn-absolute gn-text-xs", {
+  return cva("px-5 absolute text-xs", {
     variants: {
       stateMsgPosition: {
-        topRight: "gn--top-1/2 gn-right-0",
-        bottomLeft: "gn--bottom-1/2 gn-left-0",
-        bottomRight: "gn--bottom-1/2 gn--right-1/2",
+        topRight: "-top-1/2 right-0",
+        bottomLeft: "-bottom-1/2 left-0",
+        bottomRight: "-bottom-1/2 -right-1/2",
       },
       state: {
-        primary: "gn-text-white",
-        success: "gn-text-green-700",
-        danger: "gn-text-red-700",
-        warn: "gn-text-amber-500",
+        primary: "text-white",
+        success: "text-green-700",
+        danger: "text-red-700",
+        warn: "text-amber-500",
       },
     },
   })({
@@ -152,20 +152,20 @@ const stateMsgClass = computed(() => {
 
 const iconClass = computed(() => {
   return cva(
-    "gn-bg-slate-700 gn-text-slate-400 gn-absolute gn-top-1/2 gn-transform gn--translate-y-1/2 gn-flex gn-items-center gn-justify-center gn-origin-0 gn-transition-all gn-duration-300 peer-focus:gn-bg-slate-600 peer-focus:gn-text-300",
+    "bg-slate-700 text-slate-400 absolute top-1/2 transform -translate-y-1/2 flex items-center justify-center origin-0 transition-all duration-300 peer-focus:bg-slate-600 peer-focus:text-300",
     {
       variants: {
         size: {
           xs: "",
           sm: "",
-          md: "gn-w-10 gn-h-full",
+          md: "w-10 h-full",
           lg: "",
           xl: "",
         },
         position: {
           right:
-            "gn-right-0 peer-focus:-gn-translate-y-[70%] peer-focus:gn-translate-x-[20%]",
-          left: "gn-left-0 peer-focus:-gn-translate-y-[70%] peer-focus:-gn-translate-x-[20%]",
+            "right-0 peer-focus:-translate-y-[70%] peer-focus:translate-x-[20%]",
+          left: "left-0 peer-focus:-translate-y-[70%] peer-focus:-translate-x-[20%]",
         },
       },
     }

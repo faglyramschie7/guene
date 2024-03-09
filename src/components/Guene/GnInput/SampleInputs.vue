@@ -1,5 +1,5 @@
 <template>
-  <div class="gn-flex-row">
+  <div class="flex-row">
     <GnInput class="" state-msg-position="topRight" round-size="500px" icon-position="right">
       <template #icon>
         <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

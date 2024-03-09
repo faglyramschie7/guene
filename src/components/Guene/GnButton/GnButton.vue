@@ -42,11 +42,11 @@ const returnButtonBlockClass = computed(() => {
 
 
 const buttonClass = computed(() => {
-    return cva("gn-inline-flex gn-items-center gn-justify-center  gn-text-sm gn-rounded-xl gn-min-h-[32px] gn-px-3 gn-py-0.5 gn-transition gn-transform gn-ease-in-out gn-duration-300   ", {
+    return cva("inline-flex items-center justify-center  text-sm rounded-xl min-h-[32px] px-3 py-0.5 transition transform ease-in-out duration-300   ", {
         variants: {
             blocker: {
-              block: 'gn-w-full',
-              non_block: 'gn-w-32'
+              block: 'w-full',
+              non_block: 'w-32'
             }
         },
         compoundVariants: [
@@ -54,81 +54,81 @@ const buttonClass = computed(() => {
             {
                 intent: "primary",
                 type: 'default',
-                class: 'gn-bg-[#094ED7] gn-text-white hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(0,_84,_255,_0.6)_0px_17px_12px_-11px]'
+                class: 'bg-[#094ED7] text-white hover:-translate-y-[10%] hover:shadow-[rgba(0,_84,_255,_0.6)_0px_17px_12px_-11px]'
             },
             {
                 intent: 'primary',
                 type: 'flat',
-                class: 'gn-text-[#094ED7] gn-bg-[#094ED7] gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
+                class: 'text-[#094ED7] bg-[#094ED7] bg-opacity-20 hover:shadow-none hover:bg-opacity-40'
             },
             {
                 intent: "primary",
                 type: 'border',
-                class: 'gn-bg-none gn-text-[#094ED7] gn-border gn-border-[#094ED7] hover:gn-bg-[#094ED7] hover:gn-bg-opacity-40'
+                class: 'bg-none text-[#094ED7] border border-[#094ED7] hover:bg-[#094ED7] hover:bg-opacity-40'
             },
             // success
             {
                 intent: "success",
                 type: 'default',
-                class: 'gn-bg-green-700 gn-text-white hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(77,_124,_15,_0.6)_0px_17px_12px_-11px]'
+                class: 'bg-green-700 text-white hover:-translate-y-[10%] hover:shadow-[rgba(77,_124,_15,_0.6)_0px_17px_12px_-11px]'
             },
             {
                 intent: 'success',
                 type: 'flat',
-                class: 'gn-text-green-700 gn-bg-green-700 gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
+                class: 'text-green-700 bg-green-700 bg-opacity-20 hover:shadow-none hover:bg-opacity-40'
             },
             {
                 intent: "success",
                 type: 'border',
-                class: 'gn-bg-none gn-text-green-700 gn-border gn-border-green-700 hover:gn-bg-green-700 hover:gn-bg-opacity-40'
+                class: 'bg-none text-green-700 border border-green-700 hover:bg-green-700 hover:bg-opacity-40'
             },
             // danger
             {
                 intent: "danger",
                 type: 'default',
-                class: 'gn-bg-red-700 gn-text-white hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(185,_28,_28,_0.6)_0px_17px_12px_-11px]'
+                class: 'bg-red-700 text-white hover:-translate-y-[10%] hover:shadow-[rgba(185,_28,_28,_0.6)_0px_17px_12px_-11px]'
             },
             {
                 intent: 'danger',
                 type: 'flat',
-                class: 'gn-text-red-700 gn-bg-red-700 gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
+                class: 'text-red-700 bg-red-700 bg-opacity-20 hover:shadow-none hover:bg-opacity-40'
             },
             {
                 intent: "danger",
                 type: 'border',
-                class: 'gn-bg-none gn-text-red-700 gn-border gn-border-red-700 hover:gn-bg-red-700 hover:gn-bg-opacity-40'
+                class: 'bg-none text-red-700 border border-red-700 hover:bg-red-700 hover:bg-opacity-40'
             },
             // warn
             {
                 intent: "warn",
                 type: 'default',
-                class: 'gn-bg-amber-500 gn-text-white hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(245,_158,_11,_0.6)_0px_17px_12px_-11px]'
+                class: 'bg-amber-500 text-white hover:-translate-y-[10%] hover:shadow-[rgba(245,_158,_11,_0.6)_0px_17px_12px_-11px]'
             },
             {
                 intent: 'warn',
                 type: 'flat',
-                class: 'gn-text-amber-500 gn-bg-amber-500 gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
+                class: 'text-amber-500 bg-amber-500 bg-opacity-20 hover:shadow-none hover:bg-opacity-40'
             },
             {
                 intent: "warn",
                 type: 'border',
-                class: 'gn-bg-none gn-text-amber-500 gn-border gn-border-amber-500 hover:gn-bg-amber-500 hover:gn-bg-opacity-40'
+                class: 'bg-none text-amber-500 border border-amber-500 hover:bg-amber-500 hover:bg-opacity-40'
             },
             // dark
             {
                 intent: "dark",
                 type: 'default',
-                class: 'gn-bg-slate-950 gn-text-white hover:gn--translate-y-[10%] hover:gn-shadow-[rgba(2,_6,_23,_0.6)_0px_17px_12px_-11px]'
+                class: 'bg-slate-950 text-white hover:-translate-y-[10%] hover:shadow-[rgba(2,_6,_23,_0.6)_0px_17px_12px_-11px]'
             },
             {
                 intent: 'dark',
                 type: 'flat',
-                class: 'gn-text-white gn-bg-slate-950 gn-bg-opacity-20 hover:gn-shadow-none hover:gn-bg-opacity-40'
+                class: 'text-white bg-slate-950 bg-opacity-20 hover:shadow-none hover:bg-opacity-40'
             },
             {
                 intent: "dark",
                 type: 'border',
-                class: 'gn-bg-none gn-text-white gn-border gn-border-slate-950 hover:gn-bg-slate-950 hover:gn-bg-opacity-40'
+                class: 'bg-none text-white border border-slate-950 hover:bg-slate-950 hover:bg-opacity-40'
             },
         ]
     })({
@@ -143,26 +143,26 @@ const buttonClass = computed(() => {
     <component :is="props.as" :class="cn(buttonClass)">
     <!-- {{returnButtonBlockClass}} -->
         <!-- loaders -->
-        <svg v-if="props.loading" class="gn-animate-spin gn-h-5 gn-w-5 gn-absolute" xmlns="http://www.w3.org/2000/svg"
+        <svg v-if="props.loading" class="animate-spin h-5 w-5 absolute" xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24">
-            <circle class="gn-opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="gn-opacity-75" fill="currentColor"
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor"
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
             </path>
         </svg>
 
         <!-- left component -->
-        <component :is="props.leftIcon" :class="['gn-w-5 gn-mr-2', props.loading && 'gn-invisible']"
+        <component :is="props.leftIcon" :class="['w-5 mr-2', props.loading && 'invisible']"
             v-if="!props.loading" />
 
         <!-- {{ $myPlugin.message }} -->
 
-        <span :class="[props.loading && 'gn-invisible']">
+        <span :class="[props.loading && 'invisible']">
             <slot />
         </span>
         <!-- right component -->
 
-        <component :is="props.rightIcon" :class="['gn-w-5 gn-ml-2', props.loading && 'gn-invisible']"
+        <component :is="props.rightIcon" :class="['w-5 ml-2', props.loading && 'invisible']"
             v-if="!props.loading" />
 
     </component>

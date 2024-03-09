@@ -30,8 +30,8 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="gn-relative gn-w-full">
-    <!-- <input type="range" class="gn-w-full gn-appearance-none gn-bg-transparent [&::-webkit-slider-runnable-track]:gn-rounded-full [&::-webkit-slider-runnable-track]:gn-bg-slate-600 [&::-webkit-slider-thumb]:gn-appearance-none [&::-webkit-slider-thumb]:gn-h-[15px] [&::-webkit-slider-thumb]:gn-w-[15px] [&::-webkit-slider-thumb]:gn-rounded-full [&::-webkit-slider-thumb]:gn-bg-blue-500"/> -->
+  <div class="relative w-full">
+    <!-- <input type="range" class="w-full appearance-none bg-transparent [&::-webkit-slider-runnable-track]:rounded-full [&::-webkit-slider-runnable-track]:bg-slate-600 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-[15px] [&::-webkit-slider-thumb]:w-[15px] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500"/> -->
 
     <input type="range" class="">
   </div>

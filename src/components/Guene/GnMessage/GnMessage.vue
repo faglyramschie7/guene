@@ -21,9 +21,9 @@ const msgClass = computed(() => {
   return cva("", {
     variants: {
       position: {
-        topRight: 'gn-top-0 gn-right-0',
-        bottomLeft: 'gn-bottom-0 gn-left-0',
-        bottomRight: 'gn-bottom-0 gn-right-0'
+        topRight: 'top-0 right-0',
+        bottomLeft: 'bottom-0 left-0',
+        bottomRight: 'bottom-0 right-0'
 
       }
     }

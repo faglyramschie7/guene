@@ -26,15 +26,15 @@ const props = defineProps({
 })
 
 const alertClass = computed(() =>{
-  return cva("gn-px-5 gn-py-4 gn-relative",{
+  return cva("px-5 py-4 relative",{
     variants: {
       intent: {
-        primary: "gn-bg-[#094ED7] gn-border-l-4 gn-border-[#000000] gn-border-opacity-20 gn-text-white"
+        primary: "bg-[#094ED7] border-l-4 border-[#000000] border-opacity-20 text-white"
       },
       rounded: {
-        xl: "gn-rounded-xl",
-        lg: "gn-rounded-lg",
-        sm: "gn-rounded-sm",
+        xl: "rounded-xl",
+        lg: "rounded-lg",
+        sm: "rounded-sm",
 
       }
     }
@@ -49,20 +49,20 @@ const alertClass = computed(() =>{
 
 <template>
   <div :class="[cn(alertClass),gnClass]">
-    <div class="gn-absolute gn-text-white gn-top-0 gn-right-0 gn-mr-3 gn-mt-2 gn-z-30 gn-w-5 gn-h-5">
+    <div class="absolute text-white top-0 right-0 mr-3 mt-2 z-30 w-5 h-5">
       <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
       </svg>
     </div>
-    <div class="gn-text-lg gn-font-bold gn-py-1">
+    <div class="text-lg font-bold py-1">
       <slot name="header">
       </slot>
     </div>
-    <div class="gn-py-1">
+    <div class="py-1">
       <slot name="body">
       </slot>
     </div>
-    <div class="gn-w-full gn-py-1">
+    <div class="w-full py-1">
       <slot name="footer"></slot>
     </div>
   </div>

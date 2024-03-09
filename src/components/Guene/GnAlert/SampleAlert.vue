@@ -1,6 +1,6 @@
 <template>
-  <div class="gn-font-poppins">
-    <GnAlert rounded="xl" gnClass="gn-bg-gradient-to-tl gn-from-sky-500 gn-to-blue-600">
+  <div class="font-poppins">
+    <GnAlert rounded="xl" gnClass="bg-gradient-to-tl from-sky-500 to-blue-600">
       <template #header>
         Welcome to Guene UI
       </template>

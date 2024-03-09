@@ -8,22 +8,24 @@ import SampleSliders from "../components/Guene/GnSlider/SampleSliders.vue"
 import SampleToasts from "../components/Guene/GnToast/SampleToasts.vue"
 
 import SampleDialog from "../components/Guene/GnDialog/SampleDialog.vue"
+import SampleSwitch from "../components/Guene/GnSwitch/SampleSwitch.vue"
 
 
 import Logo from '../components/Logo.vue'
-import { BeakerIcon } from '@heroicons/vue/24/solid'
 </script>
 
 <template>
-  <main class="gn-bg-[#1B2127] gn-min-h-screen gn-space-y-2 gn-p-4">
+  <main class=" min-h-screen space-y-2 p-4">
     <Logo></Logo>
     <!--<SampleInputs>
     </SampleInputs>-->
-    <SampleDialog></SampleDialog>
+
+    <SampleSwitch></SampleSwitch>
+    <!-- <SampleDialog></SampleDialog>
     <SampleToasts></SampleToasts>
     <SampleSliders></SampleSliders>
     <SampleAlert></SampleAlert>
     <SampleCards></SampleCards>
-    <SampleButtons></SampleButtons>
+    <SampleButtons></SampleButtons> -->
   </main>
 </template>
